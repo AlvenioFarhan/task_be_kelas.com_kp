@@ -1,23 +1,22 @@
 // app.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const connection = require("./db"); 
+const connection = require("./db");
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Selamat datang di Aplikasi CRUD Pendataan Barang!');
+app.get("/", (req, res) => {
+  res.send("Selamat datang di Aplikasi CRUD Pendataan Barang!");
 });
 
-const path = require('path');
+const path = require("path");
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
-
 
 // API - Create
 app.post("/barang", (req, res) => {
@@ -39,6 +38,7 @@ app.get('/barang', (req, res) => {
       console.error('Error fetching data:', err);
       res.status(500).json({ error: 'Internal server error' });
     } else {
+      console.log('Data retrieved:', results);
       res.json(results);
     }
   });
@@ -68,8 +68,8 @@ app.delete("/barang/:id", (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.listen(port, () => {
